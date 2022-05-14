@@ -1,0 +1,47 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    class Technology {
+        constructor(TechnologyId) {
+            this.TechnologyId = TechnologyId;
+        }
+
+        sendData() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CampusMindByTechnology")',
+                data: '{TechnologyId: ' + JSON.stringify(this.TechnologyId) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Data has been added successfully.");
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+        }
+    }
+
+    $('#btnSave').click(function{
+        var id = $('#TechonolgyId').val();
+        let Technology = new Technology(data);
+
+        lead.sendData();
+
+    })
+</script>
+<label for="Technology">Choose a Technology:</label>
+<select name="TechonolgyId" id="TechnologyId">
+
+    @foreach (var item in ViewBag.Data)
+    {
+        <option value="@item.TechonolgyId">@item.TechnologyName</option>
+
+    }
+</select>
+<br>
+<br>
+<input type="submit" value="Submit" id="btnSave" name="Submit">
+
+

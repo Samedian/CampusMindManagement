@@ -1,0 +1,47 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    class Lead {
+        constructor(LeadId) {
+            this.LeadId = LeadId;
+        }
+
+        sendData() {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CampusMindByLead")',
+                data: '{LeadId: ' + JSON.stringify(this.LeadId) + '}',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Data has been added successfully.");
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+        }
+    }
+
+    $('#btnSave').click(function{
+        var id = $('#LeadId').val();
+        let lead = new Lead(data);
+
+        lead.sendData();
+
+    })
+</script>
+<form method="post">
+    <label for="Lead">Choose a Lead:</label>
+    <select name="LeadId" id="LeadId">
+
+        @foreach (var item in ViewBag.Data)
+        {
+            <option value="@item.LeadId">@item.LeadName</option>
+
+        }
+    </select>
+    <br>
+    <br>
+    <input type="submit" value="Submit" id="btnSave" name="Submit">
+</form>

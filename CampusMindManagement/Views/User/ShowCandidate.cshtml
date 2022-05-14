@@ -1,0 +1,34 @@
+﻿<html>
+<head>
+    <style>
+        table ,th, td{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h5 style="text-align:center">Candidates</h5>
+    <table style="text-align:center">
+        <tr>
+            <th>
+                Candidate Id
+            </th>
+            <th>
+                Candidate Name
+            </th>
+        </tr>
+
+        @foreach (var item in ViewBag.Data)
+        {
+            <tr>
+                <td>@item.CandidateId</td>
+                <td>@item.CandidateName</td>
+            </tr>
+        }
+    </table>
+</body>
+
+@Html.ActionLink("Index", "Index")
+</html>
+
+
